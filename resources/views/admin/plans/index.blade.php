@@ -7,6 +7,7 @@
 
     <header class="dashboard-header">
         <h1>Membership Plans</h1>
+         <a href="{{ route('admin.plans.create') }}" class="btn-admin-small">+ Add Plan</a>
     </header>
 
     <table class="admin-table">

@@ -7,7 +7,8 @@
 
     <header class="dashboard-header">
         <h1>ChampionClub Admin</h1>
-        <a href="{{ route('admin.plans.index') }}"></a>
+           <div style="display:flex; gap:12px; align-items:center;">
+         <a href="{{ route('admin.plans.index') }}" class="btn-logout">Manage Plans</a>
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="btn-logout">Logout</button>

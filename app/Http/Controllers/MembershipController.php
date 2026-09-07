@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Plan;
 
 class MembershipController extends Controller
 {
- public function index(){
-    return view('membership');
-     }
+    public function index()
+    {
+        $plans = Plan::orderBy('display_order')->get();
+
+        return view('membership', compact('plans'));
+    }
 }

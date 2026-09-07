@@ -39,6 +39,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/plans/create', [AdminPlanController::class, 'create'])->name('admin.plans.create');
     Route::get('/admin/plans/{plan}/edit', [AdminPlanController::class, 'edit'])->name('admin.plans.edit');
     Route::put('/admin/plans/{plan}', [AdminPlanController::class, 'update'])->name('admin.plans.update');
+    Route::delete('/admin/plans/{plan}', [AdminPlanController::class, 'destroy'])->name('admin.plans.destroy');
 }
 );
 

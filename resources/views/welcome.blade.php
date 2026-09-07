@@ -247,7 +247,7 @@
             <li>4 personal coaching sessions</li>
             <li>Custom nutrition plan</li>
           </ul>
-          <a class="btn btn-outline btn-small" href="#trial">Choose Elite</a>
+          <a class="btn btn-outline btn-small" href="/contact">Choose Elite</a>
         </div>
       </div>
     </div>
@@ -271,7 +271,7 @@
     <div class="container cta-inner">
       <h2>Your first session is on us.</h2>
       <p>Walk in, meet the coaches, use the floor. No pressure, no sales pitch.</p>
-      <a class="btn btn-primary" href="#contact">Book your free trial</a>
+      <a class="btn btn-primary" href="/contact">Book your free trial</a>
     </div>
   </section>
 
@@ -301,10 +301,10 @@
     <div class="footer-links">
       <h3>Quick links</h3>
       <ul>
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="#membership">Membership</a></li>
-        <li><a href="#trainers">Trainers</a></li>
-        <li><a href="#trial">Free trial</a></li>
+        <li><a href="/program">Programs</a></li>
+        <li><a href="/membership">Membership</a></li>
+        <li><a href="/trainers">Trainers</a></li>
+        <li><a href="/contact">Free trial</a></li>
       </ul>
     </div>
 

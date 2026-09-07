@@ -36,7 +36,11 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/plans', [AdminPlanController::class, 'index'])->name('admin.plans.index');
-});
+    Route::get('/admin/plans/create', [AdminPlanController::class, 'create'])->name('admin.plans.create');
+    Route::get('/admin/plans/{plan}/edit', [AdminPlanController::class, 'edit'])->name('admin.plans.edit');
+    Route::put('/admin/plans/{plan}', [AdminPlanController::class, 'update'])->name('admin.plans.update');
+}
+);
 
 
 

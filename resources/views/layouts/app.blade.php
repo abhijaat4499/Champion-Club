@@ -19,10 +19,7 @@
 <header class="site-header" id="top">
   <div class="container header-inner">
     <a class="logo" href="{{ route('gym.home') }}">
-      <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
-        <circle cx="24" cy="24" r="21" fill="none"/>
-        <path d="M24 12 L27 21 L36 21 L28.5 26.5 L31.5 35.5 L24 30 L16.5 35.5 L19.5 26.5 L12 21 L21 21 Z" fill="currentColor" stroke="none"/>
-      </svg>
+   <img src="{{ asset('images/logo.jpg') }}" alt="ChampionClub gym " class="logo-photo-header">
       <span>ChampionClub</span>
     </a>
 

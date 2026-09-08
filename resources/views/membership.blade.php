@@ -14,40 +14,25 @@
 <section class="membership" id="plans">
     <div class="container">
         <div class="podium">
-            <div class="tier tier-bronze">
-                <span class="tier-medal">Starter</span>
-                <p class="tier-price"><span class="amount">₹1,499</span><span class="period">/month</span></p>
-                <ul class="tier-features">
-                    <li>Full gym floor access</li>
-                    <li>Locker and shower access</li>
-                    <li>One induction session with a coach</li>
-                </ul>
-                <a class="btn btn-outline btn-small" href="{{ route('gym.contact') }}">Choose Starter</a>
-            </div>
-
-            <div class="tier tier-gold featured">
+    @foreach($plans as $plan)
+        <div class="tier tier-{{ $plan->color }} {{ $plan->is_featured ? 'featured' : '' }}">
+            @if($plan->is_featured)
                 <span class="tier-flag">Most popular</span>
-                <span class="tier-medal">Champion</span>
-                <p class="tier-price"><span class="amount">₹2,999</span><span class="period">/month</span></p>
-                <ul class="tier-features">
-                    <li>Everything in Starter</li>
-                    <li>Unlimited group classes</li>
-                    <li>Monthly progress check-in</li>
-                </ul>
-                <a class="btn btn-primary btn-small" href="{{ route('gym.contact') }}">Choose Champion</a>
-            </div>
-
-            <div class="tier tier-silver">
-                <span class="tier-medal">Elite</span>
-                <p class="tier-price"><span class="amount">₹4,999</span><span class="period">/month</span></p>
-                <ul class="tier-features">
-                    <li>Everything in Champion</li>
-                    <li>4 personal coaching sessions</li>
-                    <li>Custom nutrition plan</li>
-                </ul>
-                <a class="btn btn-outline btn-small" href="{{ route('gym.contact') }}">Choose Elite</a>
-            </div>
+            @endif
+            <span class="tier-medal">{{ $plan->name }}</span>
+            <p class="tier-price">
+                <span class="amount">₹{{ number_format($plan->price) }}</span>
+                <span class="period">{{ $plan->period }}</span>
+            </p>
+            <ul class="tier-features">
+                @foreach($plan->featureList() as $feature)
+                    <li>{{ $feature }}</li>
+                @endforeach
+            </ul>
+            <a class="btn {{ $plan->is_featured ? 'btn-primary' : 'btn-outline' }} btn-small" href="{{ route('gym.contact') }}">{{ $plan->button_text }}</a>
         </div>
+    @endforeach
+</div>
     </div>
 </section>
 

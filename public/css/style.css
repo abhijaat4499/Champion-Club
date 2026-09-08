@@ -876,3 +876,22 @@ section { padding: 96px 0; }
   font-size: 0.8rem;
   margin-top: 4px;
 }
+.hero-photo {
+  width: 100%;
+  max-width: 660px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at center, #fff 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 65% 60% at center, #fff 30%, transparent 100%);
+
+}
+.logo-photo-header {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  flex-shrink: 0;
+}

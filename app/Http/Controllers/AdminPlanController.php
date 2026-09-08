@@ -17,6 +17,8 @@ class AdminPlanController extends Controller
 
         return view('admin.plans.index', compact('plans'));
     }
+
+
     public function create()
 {
     return view('admin.plans.create');
@@ -66,4 +68,11 @@ public function update(Request $request, Plan $plan)
 
     return redirect()->route('admin.plans.index')->with('success', 'Plan updated.');
 }
+
+ public function destroy( Plan $plan)
+{
+   $plan->delete();
+    return redirect()->route('admin.plans.index')->with('success', 'Plan deleted.');
+}
+
 }

@@ -29,24 +29,9 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <svg class="medallion" viewBox="0 0 400 400">
-          <defs>
-            <path id="topCurve" d="M 65,200 A 135,135 0 0 1 335,200" fill="none"/>
-            <path id="bottomCurve" d="M 90,240 A 135,135 0 0 0 310,240" fill="none"/>
-          </defs>
-          <circle class="ring-outer" cx="200" cy="200" r="172" fill="none"/>
-          <circle class="ring-thin" cx="200" cy="200" r="150" fill="none"/>
-          <circle class="ring-main" cx="200" cy="200" r="112" fill="none"/>
-          <text class="arc-text">
-            <textPath href="{{ route('gym.home') }}" startOffset="50%" text-anchor="middle">ChampionClub</textPath>
-          </text>
-          <text class="arc-text arc-text-small">
-            <textPath href="#bottomCurve" startOffset="50%" text-anchor="middle">Strength and Discipline</textPath>
-          </text>
-          <polygon class="star" points="200,160 209.4,187.06 238.04,187.64 215.22,204.94 223.51,232.36 200,216 176.49,232.36 184.78,204.94 161.96,187.64 190.60,187.06"/>
-        </svg>
-      </div>
+      <div class="hero-visual">
+    <img src="{{ asset('images/hero.jpg') }}" alt="ChampionClub gym floor" class="hero-photo">
+</div>
     </div>
   </section>
 
@@ -174,40 +159,25 @@
       </div>
 
       <div class="podium">
-        <div class="tier tier-bronze">
-          <span class="tier-medal">Starter</span>
-          <p class="tier-price"><span class="amount">₹1,499</span><span class="period">/month</span></p>
-          <ul class="tier-features">
-            <li>Full gym floor access</li>
-            <li>Locker and shower access</li>
-            <li>One induction session with a coach</li>
-          </ul>
-          <a class="btn btn-outline btn-small" href="{{ route('gym.contact') }}">Choose Starter</a>
+    @foreach($plans as $plan)
+        <div class="tier tier-{{ $plan->color }} {{ $plan->is_featured ? 'featured' : '' }}">
+            @if($plan->is_featured)
+                <span class="tier-flag">Most popular</span>
+            @endif
+            <span class="tier-medal">{{ $plan->name }}</span>
+            <p class="tier-price">
+                <span class="amount">₹{{ number_format($plan->price) }}</span>
+                <span class="period">{{ $plan->period }}</span>
+            </p>
+            <ul class="tier-features">
+                @foreach($plan->featureList() as $feature)
+                    <li>{{ $feature }}</li>
+                @endforeach
+            </ul>
+            <a class="btn {{ $plan->is_featured ? 'btn-primary' : 'btn-outline' }} btn-small" href="{{ route('gym.contact') }}">{{ $plan->button_text }}</a>
         </div>
-
-        <div class="tier tier-gold featured">
-          <span class="tier-flag">Most popular</span>
-          <span class="tier-medal">Champion</span>
-          <p class="tier-price"><span class="amount">₹2,999</span><span class="period">/month</span></p>
-          <ul class="tier-features">
-            <li>Everything in Starter</li>
-            <li>Unlimited group classes</li>
-            <li>Monthly progress check-in</li>
-          </ul>
-          <a class="btn btn-primary btn-small" href="{{ route('gym.contact') }}">Choose Champion</a>
-        </div>
-
-        <div class="tier tier-silver">
-          <span class="tier-medal">Elite</span>
-          <p class="tier-price"><span class="amount">₹4,999</span><span class="period">/month</span></p>
-          <ul class="tier-features">
-            <li>Everything in Champion</li>
-            <li>4 personal coaching sessions</li>
-            <li>Custom nutrition plan</li>
-          </ul>
-          <a class="btn btn-outline btn-small" href="{{ route('gym.contact') }}">Choose Elite</a>
-        </div>
-      </div>
+    @endforeach
+</div>
     </div>
   </section>
 

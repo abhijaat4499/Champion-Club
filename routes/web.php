@@ -7,6 +7,7 @@ use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminPlanController;
+use App\Http\Controllers\AdminTrainerController;
 
 
 
@@ -43,6 +44,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/plans/{plan}/edit', [AdminPlanController::class, 'edit'])->name('admin.plans.edit');
     Route::put('/admin/plans/{plan}', [AdminPlanController::class, 'update'])->name('admin.plans.update');
     Route::delete('/admin/plans/{plan}', [AdminPlanController::class, 'destroy'])->name('admin.plans.destroy');
+    Route::get('/admin/trainers', [AdminTrainerController::class, 'index'])->name('admin.trainers.index');
 }
 );
 

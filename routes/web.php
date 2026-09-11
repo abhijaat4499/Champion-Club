@@ -45,6 +45,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::put('/admin/plans/{plan}', [AdminPlanController::class, 'update'])->name('admin.plans.update');
     Route::delete('/admin/plans/{plan}', [AdminPlanController::class, 'destroy'])->name('admin.plans.destroy');
     Route::get('/admin/trainers', [AdminTrainerController::class, 'index'])->name('admin.trainers.index');
+    Route::get('/admin/trainers/create', [AdminTrainerController::class, 'create'])->name('admin.trainers.create');
+    Route::post('/admin/trainers', [AdminTrainerController::class, 'store'])->name('admin.trainers.store');
 }
 );
 

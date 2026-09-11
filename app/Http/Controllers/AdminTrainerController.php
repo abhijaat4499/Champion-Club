@@ -12,4 +12,9 @@ class AdminTrainerController extends Controller
 
         return view('admin.trainers.index', compact('trainers'));
     }
+
+    public function create()
+{
+    return view('admin.trainers.create');
+}
 }

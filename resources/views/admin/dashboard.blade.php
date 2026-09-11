@@ -5,15 +5,17 @@
 @section('content')
 <div class="dashboard-wrap">
 
-    <header class="dashboard-header">
-        <h1>ChampionClub Admin</h1>
-           <div style="display:flex; gap:12px; align-items:center;">
-         <a href="{{ route('admin.plans.index') }}" class="btn-logout">Manage Plans</a>
+   <header class="dashboard-header">
+    <h1>ChampionClub Admin</h1>
+     <div style="display:flex; gap:12px; align-items:center;">
+        <a href="{{ route('admin.plans.index') }}" class="btn-logout">Manage Plans</a>
+        <a href="{{ route('admin.trainers.index') }}" class="btn-logout">Manage Trainers</a>
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="btn-logout">Logout</button>
         </form>
-    </header>
+     </div>
+   </header>
 
     <div class="stat-cards">
         <div class="stat-card">

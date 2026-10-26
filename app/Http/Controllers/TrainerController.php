@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Trainer;
 
 class TrainerController extends Controller
 {
     public function index()
     {
-        return view('trainers');
+        $trainers = Trainer::orderBy('display_order')->get();
+
+        return view('trainers', compact('trainers'));
     }
 }

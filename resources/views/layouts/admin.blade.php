@@ -9,5 +9,6 @@
 </head>
 <body>
     @yield('content')
+@include('admin.partials.busy-forms')
 </body>
 </html>

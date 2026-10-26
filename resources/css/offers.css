@@ -1,0 +1,575 @@
+/* =========================================================
+   Event offer cards
+   ========================================================= */
+.offers-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    max-width: 1040px;
+    margin-inline: auto;
+}
+
+.offers-grid-compact {
+    max-width: 680px;
+}
+
+/* ---------- Card ---------- */
+.offer-card {
+    --tick: #e2b649;
+    --foot-line: rgba(255, 255, 255, 0.16);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    min-height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.offer-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
+}
+
+.offer-deco {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.offer-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    padding: 40px 36px 30px;
+}
+
+.offer-body > :not(.offer-foot) {
+    max-width: 56%;
+}
+
+.offer-greeting {
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.offer-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.offer-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 12px;
+}
+
+.offer-now {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.offer-was {
+    font-size: 1.05rem;
+    opacity: 0.7;
+}
+
+.offer-off {
+    align-self: center;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+}
+
+.offer-desc {
+    font-size: 0.98rem;
+    max-width: 44ch;
+}
+
+.offer-points {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.offer-points li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 0.97rem;
+}
+
+.offer-points li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 7px;
+    width: 10px;
+    height: 6px;
+    border-left: 2px solid var(--tick);
+    border-bottom: 2px solid var(--tick);
+    transform: rotate(-45deg);
+}
+
+.offer-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 18px;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px dashed var(--foot-line);
+}
+
+.offer-deadline {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+}
+
+.offer-deadline strong {
+    font-weight: 700;
+}
+
+.offer-card .offer-cta {
+    border-radius: 4px;
+    padding: 13px 28px;
+    font-size: 0.92rem;
+    font-weight: 800;
+}
+
+/* ---------- New Year ---------- */
+.offer-new_year {
+    --tick: #f3d27a;
+    background:
+        radial-gradient(circle at 82% 18%, rgba(88, 92, 200, 0.55), transparent 48%),
+        linear-gradient(150deg, #0b1026 0%, #151a3d 55%, #261a3d 100%);
+    color: #f6f1e3;
+}
+
+.offer-new_year .offer-title { color: #fff; }
+.offer-new_year .offer-greeting { background: rgba(243, 210, 122, 0.14); color: #f3d27a; border: 1px solid rgba(243, 210, 122, 0.45); }
+.offer-new_year .offer-now { background: linear-gradient(135deg, #fff1c1, #d4a537); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.offer-new_year .offer-was,
+.offer-new_year .offer-desc,
+.offer-new_year .offer-points li,
+.offer-new_year .offer-deadline { color: #c9cbe6; }
+.offer-new_year .offer-deadline strong { color: #f3d27a; }
+.offer-new_year .offer-off { background: #d4a537; color: #1b1630; }
+.offer-new_year .offer-cta { background: linear-gradient(135deg, #f7dc8c, #d4a537); color: #1b1630; }
+
+.ny-year {
+    position: absolute;
+    top: 150px;
+    right: 22px;
+    font-family: var(--font-display);
+    font-size: 6.2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(243, 210, 122, 0.4);
+    rotate: -8deg;
+}
+
+.ny-burst {
+    position: absolute;
+    font-size: 64px;
+}
+
+.ny-burst-1 { top: 22px; right: 40px; font-size: 92px; background: linear-gradient(135deg, #fff1c1, #d4a537); }
+.ny-burst-2 { top: 48px; right: 190px; font-size: 58px; background: linear-gradient(135deg, #ffb4d6, #ff7ab6); }
+.ny-burst-3 { top: 150px; right: 170px; font-size: 40px; background: linear-gradient(135deg, #c6ecff, #8fd3ff); }
+
+.ny-confetti {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle, #f3d27a 1.6px, transparent 2.2px) 0 0 / 46px 46px,
+        radial-gradient(circle, #ff7ab6 1.3px, transparent 2px) 20px 28px / 62px 62px,
+        radial-gradient(circle, #8fd3ff 1.3px, transparent 2px) 34px 10px / 54px 54px;
+    -webkit-mask-image: radial-gradient(circle at 85% 18%, #000 0%, transparent 55%);
+    mask-image: radial-gradient(circle at 85% 18%, #000 0%, transparent 55%);
+    opacity: 0.8;
+}
+
+/* ---------- Diwali ---------- */
+.offer-diwali {
+    --tick: #ffd27a;
+    --foot-line: rgba(255, 210, 122, 0.25);
+    background:
+        radial-gradient(circle at 84% 26%, rgba(255, 170, 60, 0.5), transparent 46%),
+        linear-gradient(155deg, #3b0a1e 0%, #6d1424 55%, #8a2b0f 100%);
+    color: #fff3e0;
+}
+
+.offer-diwali .offer-body { padding-top: 58px; }
+.offer-diwali .offer-title { color: #fff; }
+.offer-diwali .offer-greeting { background: rgba(255, 179, 0, 0.16); color: #ffd27a; border: 1px solid rgba(255, 210, 122, 0.5); }
+.offer-diwali .offer-now { background: linear-gradient(135deg, #ffe9a6, #ffb300); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.offer-diwali .offer-was,
+.offer-diwali .offer-desc,
+.offer-diwali .offer-points li,
+.offer-diwali .offer-deadline { color: #f5d6c4; }
+.offer-diwali .offer-deadline strong { color: #ffd27a; }
+.offer-diwali .offer-off { background: #ffb300; color: #3b0a1e; }
+.offer-diwali .offer-cta { background: linear-gradient(135deg, #ffc531, #ff7a00); color: #3b0a1e; }
+
+.dw-toran {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 34px;
+    background:
+        linear-gradient(#5a2a0a, #5a2a0a) 0 3px / 100% 2px no-repeat,
+        radial-gradient(circle at 50% 4px, #ffc21a 0 8px, #ff8a00 8.5px 10px, transparent 10.5px) 0 0 / 28px 24px repeat-x,
+        radial-gradient(ellipse 5px 8px at 50% 50%, #3f8f3a 0 100%, transparent 100%) 14px 14px / 28px 20px repeat-x;
+}
+
+.dw-rangoli {
+    position: absolute;
+    top: 24px;
+    right: -70px;
+    width: 280px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, transparent 0 22%, rgba(255, 204, 112, 0.5) 22.5% 23.5%, transparent 24% 63%, rgba(255, 204, 112, 0.5) 63.5% 64.5%, transparent 65%),
+        repeating-conic-gradient(rgba(255, 204, 112, 0.35) 0 6deg, transparent 6deg 30deg);
+    -webkit-mask-image: radial-gradient(circle, transparent 0 21%, #000 22% 70%, transparent 71%);
+    mask-image: radial-gradient(circle, transparent 0 21%, #000 22% 70%, transparent 71%);
+    opacity: 0.4;
+}
+
+.dw-diyas {
+    position: absolute;
+    top: 92px;
+    right: 34px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.dw-diya {
+    font-size: 54px;
+    background: linear-gradient(180deg, #ffe08a 0%, #ffb300 45%, #e0611c 100%);
+    filter: drop-shadow(0 0 14px rgba(255, 179, 0, 0.6));
+    transform-origin: 50% 100%;
+}
+
+.dw-diya:nth-child(2) {
+    font-size: 72px;
+}
+
+/* ---------- Holi ---------- */
+.offer-holi {
+    --tick: #ff3d8b;
+    --foot-line: rgba(42, 31, 26, 0.15);
+    background: #fffaf3;
+    color: #2a1f1a;
+}
+
+.offer-holi .offer-title { background: linear-gradient(90deg, #ff3d8b, #ff8a00 50%, #9b5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.offer-holi .offer-greeting { background: linear-gradient(90deg, #ff3d8b, #ff8a00, #19c37d, #3d8bff, #9b5cff); color: #fff; }
+.offer-holi .offer-now { color: #c2185b; }
+.offer-holi .offer-was { color: #8a7b70; }
+.offer-holi .offer-desc,
+.offer-holi .offer-points li,
+.offer-holi .offer-deadline { color: #5c4d44; }
+.offer-holi .offer-deadline strong { color: #c2185b; }
+.offer-holi .offer-off { background: #19c37d; color: #fff; }
+.offer-holi .offer-cta { background: linear-gradient(135deg, #ff3d8b, #ff8a00); color: #fff; }
+
+.holi-splash { position: absolute; border-radius: 50%; filter: blur(26px); opacity: 0.6; }
+.holi-splash.s1 { width: 230px; height: 230px; top: -70px; right: -40px; background: #ff3d8b; }
+.holi-splash.s2 { width: 160px; height: 160px; top: 70px; right: 130px; background: #ffc21a; }
+.holi-splash.s3 { width: 130px; height: 130px; top: -40px; right: 190px; background: #19c37d; }
+.holi-splash.s4 { width: 190px; height: 190px; top: 150px; right: -50px; background: #3d8bff; }
+.holi-splash.s5 { width: 120px; height: 120px; top: 190px; right: 120px; background: #9b5cff; }
+
+.holi-dots {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle, #ff3d8b 2px, transparent 2.6px) 0 0 / 38px 38px,
+        radial-gradient(circle, #19c37d 1.6px, transparent 2.2px) 12px 20px / 52px 52px,
+        radial-gradient(circle, #3d8bff 1.6px, transparent 2.2px) 26px 6px / 44px 44px;
+    -webkit-mask-image: radial-gradient(circle at 82% 30%, #000 0%, transparent 52%);
+    mask-image: radial-gradient(circle at 82% 30%, #000 0%, transparent 52%);
+    opacity: 0.7;
+}
+
+.holi-palette {
+    position: absolute;
+    top: 70px;
+    right: 70px;
+    font-size: 96px;
+    background: linear-gradient(135deg, #ffffff, #fff4fa);
+    filter: drop-shadow(0 10px 18px rgba(155, 92, 255, 0.35));
+}
+
+/* ---------- Christmas ---------- */
+.offer-christmas {
+    --tick: #ffd54a;
+    background:
+        radial-gradient(circle at 80% 22%, rgba(255, 255, 255, 0.12), transparent 42%),
+        linear-gradient(160deg, #0f5232 0%, #0a3a23 60%, #062a19 100%);
+    color: #effaf3;
+}
+
+.offer-christmas .offer-body { padding-top: 50px; }
+.offer-christmas .offer-title { color: #fff; }
+.offer-christmas .offer-greeting { background: #d62839; color: #fff; }
+.offer-christmas .offer-now { color: #ffd54a; }
+.offer-christmas .offer-was,
+.offer-christmas .offer-desc,
+.offer-christmas .offer-points li,
+.offer-christmas .offer-deadline { color: #cfe9d8; }
+.offer-christmas .offer-deadline strong { color: #ffd54a; }
+.offer-christmas .offer-off { background: #d62839; color: #fff; }
+.offer-christmas .offer-cta { background: #d62839; color: #fff; }
+.offer-christmas .offer-cta:hover { background: #ec3a4b; }
+
+.xm-stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: repeating-linear-gradient(-45deg, #d62839 0 12px, #fff 12px 24px);
+}
+
+.xm-snow {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.9) 1.6px, transparent 2.2px) 0 0 / 40px 40px,
+        radial-gradient(circle, rgba(255, 255, 255, 0.6) 1.1px, transparent 1.8px) 18px 24px / 28px 28px;
+    opacity: 0.45;
+}
+
+.xm-tree {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.xm-leaf {
+    font-size: 128px;
+    background: linear-gradient(180deg, #6fe39a 0%, #2fae5f 60%, #1b7a41 100%);
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.35));
+}
+
+.xm-star {
+    margin-bottom: -10px;
+    font-size: 34px;
+    background: linear-gradient(135deg, #fff2a8, #ffd54a);
+    filter: drop-shadow(0 0 10px rgba(255, 213, 74, 0.7));
+}
+
+.xm-flake {
+    position: absolute;
+    top: 190px;
+    right: 190px;
+    font-size: 36px;
+    background: rgba(255, 255, 255, 0.55);
+}
+
+/* ---------- Others ---------- */
+.offer-other {
+    --tick: #e2b649;
+    --foot-line: rgba(226, 182, 73, 0.25);
+    background:
+        linear-gradient(90deg, #d4a537, #e4572e) top / 100% 4px no-repeat,
+        radial-gradient(circle at 86% 18%, rgba(212, 165, 55, 0.22), transparent 44%),
+        linear-gradient(160deg, #1b1b1e 0%, #0f0f11 100%);
+    border: 1px solid rgba(212, 165, 55, 0.25);
+    color: #e9e4da;
+}
+
+.offer-other .offer-title { color: #fff; }
+.offer-other .offer-greeting { background: rgba(212, 165, 55, 0.14); color: #eccd76; border: 1px solid rgba(212, 165, 55, 0.4); }
+.offer-other .offer-now { background: linear-gradient(135deg, #f6e2a8, #d4a537); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.offer-other .offer-was,
+.offer-other .offer-desc,
+.offer-other .offer-points li,
+.offer-other .offer-deadline { color: #b9b3a8; }
+.offer-other .offer-off { background: #d4a537; color: #09090a; }
+.offer-other .offer-deadline strong { color: #eccd76; }
+.offer-other .offer-cta { background: #d4a537; color: #09090a; }
+.offer-other .offer-cta:hover { background: #e2b649; }
+
+.std-icon {
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 22px;
+    color: #09090a;
+    font-size: 44px;
+    background: linear-gradient(140deg, #eccd76, #d4a537 55%, #b5871d);
+    box-shadow: 0 16px 30px -14px rgba(212, 165, 55, 0.9);
+    rotate: 8deg;
+}
+
+/* ---------- Decoration animations ---------- */
+.js-motion .ny-burst { animation: ny-pop 2.8s ease-out infinite; }
+.js-motion .ny-burst-2 { animation-delay: 0.9s; }
+.js-motion .ny-burst-3 { animation-delay: 1.7s; }
+
+@keyframes ny-pop {
+    0% { scale: 0.75; opacity: 0.35; }
+    35% { scale: 1.05; opacity: 1; }
+    100% { scale: 0.75; opacity: 0.35; }
+}
+
+.js-motion .dw-diya { animation: diya-flicker 1.4s ease-in-out infinite alternate; }
+.js-motion .dw-diya:nth-child(2) { animation-delay: 0.4s; }
+.js-motion .dw-diya:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes diya-flicker {
+    0% { scale: 1 1; filter: drop-shadow(0 0 10px rgba(255, 179, 0, 0.5)); }
+    100% { scale: 1.03 0.97; filter: drop-shadow(0 0 20px rgba(255, 179, 0, 0.85)); }
+}
+
+.js-motion .holi-splash { animation: splash-float 7s ease-in-out infinite alternate; }
+.js-motion .holi-splash.s2,
+.js-motion .holi-splash.s4 { animation-duration: 9s; animation-direction: alternate-reverse; }
+
+@keyframes splash-float { to { translate: -18px 14px; scale: 1.08; } }
+
+.js-motion .xm-snow { animation: snow-fall 8s linear infinite; }
+
+@keyframes snow-fall { to { background-position: 0 40px, 18px 52px; } }
+
+.js-motion .xm-star { animation: twinkle 1.6s ease-in-out infinite alternate; }
+
+@keyframes twinkle { to { scale: 1.2; opacity: 0.75; } }
+
+/* ---------- Desktop ---------- */
+@media (min-width: 901px) {
+    .offer-card { min-height: 460px; }
+    .offer-body { gap: 18px; padding: 56px 60px 44px; }
+    .offer-body > :not(.offer-foot) { max-width: 54%; }
+    .offer-greeting { font-size: 0.8rem; padding: 7px 16px; }
+    .offer-title { font-size: clamp(2.4rem, 3.6vw, 3.2rem); }
+    .offer-now { font-size: 3.8rem; }
+    .offer-was { font-size: 1.2rem; }
+    .offer-off { font-size: 0.85rem; padding: 6px 12px; }
+    .offer-points li, .offer-desc { font-size: 1.04rem; }
+    .offer-points { gap: 10px; }
+    .offer-foot { padding-top: 24px; }
+    .offer-deadline { font-size: 0.95rem; }
+    .offer-card .offer-cta { padding: 15px 36px; font-size: 1rem; }
+
+    .offer-diwali .offer-body { padding-top: 72px; }
+    .offer-christmas .offer-body { padding-top: 66px; }
+
+    .ny-year { font-size: 10rem; top: 140px; right: 56px; }
+    .ny-burst-1 { font-size: 132px; top: 34px; right: 90px; }
+    .ny-burst-2 { font-size: 86px; top: 70px; right: 340px; }
+    .ny-burst-3 { font-size: 58px; top: 290px; right: 330px; }
+
+    .dw-toran { height: 42px; background-size: 100% 2px, 34px 30px, 34px 24px; }
+    .dw-rangoli { width: 440px; top: 20px; right: -70px; }
+    .dw-diyas { top: 170px; right: 96px; gap: 14px; }
+    .dw-diya { font-size: 84px; }
+    .dw-diya:nth-child(2) { font-size: 110px; }
+
+    .offer-holi .offer-deco { scale: 1.45; transform-origin: top right; }
+
+    .xm-stripe { height: 18px; }
+    .xm-tree { top: 80px; right: 110px; }
+    .xm-leaf { font-size: 200px; }
+    .xm-star { font-size: 48px; }
+    .xm-flake { top: 300px; right: 360px; font-size: 48px; }
+
+    .std-icon { width: 150px; height: 150px; top: 120px; right: 120px; border-radius: 36px; font-size: 76px; }
+
+    .offers-grid-compact .offer-card { min-height: 320px; }
+    .offers-grid-compact .offer-body { gap: 10px; padding: 34px 36px 26px; }
+    .offers-grid-compact .offer-body > :not(.offer-foot) { max-width: 60%; }
+    .offers-grid-compact .offer-diwali .offer-body { padding-top: 52px; }
+    .offers-grid-compact .offer-christmas .offer-body { padding-top: 46px; }
+    .offers-grid-compact .offer-greeting { font-size: 0.72rem; padding: 6px 14px; }
+    .offers-grid-compact .offer-title { font-size: clamp(1.7rem, 2.2vw, 2.1rem); }
+    .offers-grid-compact .offer-now { font-size: 2.6rem; }
+    .offers-grid-compact .offer-was { font-size: 1rem; }
+    .offers-grid-compact .offer-off { font-size: 0.75rem; padding: 5px 10px; }
+    .offers-grid-compact .offer-points li,
+    .offers-grid-compact .offer-desc { font-size: 0.93rem; }
+    .offers-grid-compact .offer-points { gap: 7px; }
+    .offers-grid-compact .offer-foot { padding-top: 18px; }
+    .offers-grid-compact .offer-deadline { font-size: 0.86rem; }
+    .offers-grid-compact .offer-card .offer-cta { padding: 12px 26px; font-size: 0.92rem; }
+    .offers-grid-compact .offer-holi .offer-deco { scale: 1.05; }
+    .offers-grid-compact .dw-rangoli { width: 260px; }
+    .offers-grid-compact .dw-diyas { top: 110px; right: 40px; }
+    .offers-grid-compact .dw-diya { font-size: 52px; }
+    .offers-grid-compact .dw-diya:nth-child(2) { font-size: 68px; }
+    .offers-grid-compact .xm-tree { top: 56px; right: 48px; }
+    .offers-grid-compact .xm-leaf { font-size: 130px; }
+    .offers-grid-compact .xm-flake { top: 230px; right: 230px; font-size: 36px; }
+    .offers-grid-compact .ny-year { font-size: 5.5rem; top: 90px; right: 28px; }
+    .offers-grid-compact .ny-burst-1 { font-size: 76px; top: 26px; right: 44px; }
+    .offers-grid-compact .ny-burst-2 { font-size: 48px; top: 54px; right: 190px; }
+    .offers-grid-compact .ny-burst-3 { font-size: 36px; top: 200px; right: 180px; }
+    .offers-grid-compact .std-icon { width: 96px; height: 96px; top: 64px; right: 48px; border-radius: 26px; font-size: 48px; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+    .offer-card { min-height: 0; }
+    .offer-body { padding: 30px 22px 24px; }
+    .offer-body > :not(.offer-foot) { max-width: 100%; }
+    .offer-new_year .offer-body,
+    .offer-diwali .offer-body,
+    .offer-christmas .offer-body,
+    .offer-holi .offer-body,
+    .offer-other .offer-body { padding-top: 120px; }
+    .offer-card.offer-other .offer-body { padding-top: 30px; }
+    .offer-other .offer-greeting,
+    .offer-other .offer-title { max-width: calc(100% - 84px); }
+    .ny-year { font-size: 4.2rem; top: 26px; right: 18px; }
+    .ny-burst-1 { font-size: 64px; top: 16px; right: 150px; }
+    .ny-burst-2 { font-size: 40px; top: 36px; right: auto; left: 24px; }
+    .ny-burst-3 { display: none; }
+    .dw-rangoli { width: 200px; top: 10px; right: -60px; }
+    .dw-diyas { top: 46px; left: 0; right: 0; justify-content: center; }
+    .dw-diya { font-size: 44px; }
+    .dw-diya:nth-child(2) { font-size: 56px; }
+    .holi-palette { top: 22px; right: 22px; font-size: 70px; }
+    .xm-tree { top: 24px; right: 22px; }
+    .xm-leaf { font-size: 74px; }
+    .xm-star { font-size: 22px; margin-bottom: -6px; }
+    .xm-flake { top: 34px; right: auto; left: 26px; font-size: 30px; }
+    .std-icon { width: 64px; height: 64px; top: 28px; right: 22px; border-radius: 16px; font-size: 32px; }
+    .offer-foot { flex-direction: column; align-items: stretch; }
+    .offer-card .offer-cta { text-align: center; }
+}

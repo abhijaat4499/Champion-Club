@@ -17,5 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (\Illuminate\Http\Exceptions\PostTooLargeException $e, \Illuminate\Http\Request $request) {
+            return redirect()->back()->withErrors([
+                'upload' => 'The photos you chose are too large to upload together (more than ' . ini_get('post_max_size') . ' in total). Please upload fewer or smaller photos at a time.',
+            ]);
+        });
     })->create();

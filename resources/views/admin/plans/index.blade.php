@@ -1,51 +1,58 @@
-@extends('layouts.admin')
+@extends('layouts.admin-panel')
 
 @section('title', 'Membership Plans')
 
 @section('content')
 <div class="dashboard-wrap">
 
-    <header class="dashboard-header">
-        <h1>Membership Plans</h1>
-         <a href="{{ route('admin.plans.create') }}" class="btn-admin-small">+ Add Plan</a>
-    </header>
+    <x-admin.page-header title="Membership Plans" icon="membership">
+        <a href="{{ route('admin.plans.create') }}" class="btn-admin-small">+ Add Plan</a>
+    </x-admin.page-header>
+
+    @if(session('success'))
+        <div class="alert-success">{{ session('success') }}</div>
+    @endif
 
     <table class="admin-table">
         <thead>
             <tr>
-                <th>Order</th>
-                <th>Name</th>
+                <th class="col-order">Order</th>
+                <th>Plan</th>
                 <th>Price</th>
-                <th>Featured</th>
-                <th>Color</th>
-                <th>Actions</th>
+                <th>Badge color</th>
+                <th class="text-right">Actions</th>
             </tr>
         </thead>
         <tbody>
             @forelse($plans as $plan)
                 <tr>
-                    <td>{{ $plan->display_order }}</td>
-                    <td>{{ $plan->name }}</td>
-                    <td>₹{{ number_format($plan->price) }}{{ $plan->period }}</td>
-                    <td>{{ $plan->is_featured ? 'Yes' : '—' }}</td>
-                    <td>{{ ucfirst($plan->color) }}</td>
-                     <td> <a href="{{ route('admin.plans.edit', $plan) }}">Edit</a>
-            &nbsp;|&nbsp;
-            <form action="{{ route('admin.plans.destroy', $plan) }}" method="POST" onsubmit="return confirm('Delete this plan?');" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-link-delete">Delete</button>
-            </form>
-        </td>
+                    <td class="col-order"><span class="order-chip">{{ $plan->display_order }}</span></td>
+                    <td>
+                        <span class="person-name">{{ $plan->name }}</span>
+                        @if($plan->is_featured)
+                            <span class="badge badge-featured">Most popular</span>
+                        @endif
+                    </td>
+                    <td><span class="price">₹{{ number_format($plan->price) }}</span><span class="person-sub-inline">{{ $plan->period }}</span></td>
+                    <td><span class="color-chip color-{{ $plan->color }}">{{ ucfirst($plan->color) }}</span></td>
+                    <td class="text-right">
+                        <div class="row-actions">
+                            <a href="{{ route('admin.plans.edit', $plan) }}" class="btn-edit">Edit</a>
+
+                            <form action="{{ route('admin.plans.destroy', $plan) }}" method="POST"
+                                  onsubmit="return confirm('Delete this plan?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-delete">Delete</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @empty
-                <tr><td colspan="6">No plans yet.</td></tr>
+                <tr><td colspan="5" class="table-empty">No plans yet.</td></tr>
             @endforelse
         </tbody>
     </table>
 
 </div>
-@if(session('success'))
-    <div class="alert-success">{{ session('success') }}</div>
-@endif
 @endsection

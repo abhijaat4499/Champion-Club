@@ -4,9 +4,12 @@
 
 @section('content')
 <div class="auth-wrap">
-    <form class="auth-card" method="POST" action="{{ route('admin.login.submit') }}">
+    <form data-sends-code class="auth-card" method="POST" action="{{ route('admin.login.submit') }}">
         @csrf
         <h1>Admin Login</h1>
+        @if(session('success'))
+    <div class="alert-success">{{ session('success') }}</div>
+@endif
         <p class="auth-sub">Enter your credentials to receive a login code.</p>
 
         @error('email')
@@ -24,6 +27,7 @@
         </div>
 
         <button type="submit" class="btn-admin">Send login code</button>
+        <p class="auth-link"><a href="{{ route('admin.password.request') }}">Forgot password?</a></p>
     </form>
 </div>
 @endsection

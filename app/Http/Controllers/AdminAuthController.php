@@ -4,20 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Mail\OtpMail;
 use App\Models\Admin;
+use App\Support\AdminOtp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class AdminAuthController extends Controller
-//login page kholne ke lie
 {
     public function showLoginForm()
 {
     return view('admin.login');
 }
 
-//login karte time saare steps
 public function login(Request $request)
 {
     $credentials = $request->validate([
@@ -31,14 +30,7 @@ public function login(Request $request)
         }
 
 
-        $otp = rand(100000, 999999);
-
-    $admin->update([
-        'otp_code' => $otp,
-        'otp_expires_at' => now()->addMinutes(10),
-    ]);
-
-    Mail::to($admin->email)->send(new OtpMail($otp));
+    $this->sendLoginCode($admin);
     session(['otp_admin_id' => $admin->id]);
 
     return redirect()->route('admin.otp.form');
@@ -52,7 +44,40 @@ public function login(Request $request)
         return redirect()->route('admin.login');
     }
 
-    return view('admin.verify-otp');
+    $admin = Admin::find(session('otp_admin_id'));
+
+    return view('admin.verify-otp', [
+        'resendWait' => AdminOtp::waitSeconds($admin?->otp_expires_at),
+    ]);
+}
+
+public function resendOtp()
+{
+    $admin = Admin::find(session('otp_admin_id'));
+
+    if (! $admin) {
+        return redirect()->route('admin.login');
+    }
+
+    if ($wait = AdminOtp::waitSeconds($admin->otp_expires_at)) {
+        return redirect()->route('admin.otp.form')->withErrors(['otp' => "Please wait {$wait} seconds before asking for a new code."]);
+    }
+
+    $this->sendLoginCode($admin);
+
+    return redirect()->route('admin.otp.form')->with('success', 'A new code has been sent to your email. The old code no longer works.');
+}
+
+private function sendLoginCode(Admin $admin): void
+{
+    $otp = AdminOtp::generate($admin->otp_code);
+
+    $admin->update([
+        'otp_code' => $otp,
+        'otp_expires_at' => AdminOtp::expiresAt(),
+    ]);
+
+    Mail::to($admin->email)->send(new OtpMail($otp));
 }
 
 
@@ -62,7 +87,7 @@ public function verifyOtp(Request $request)
 
     $admin = Admin::find(session('otp_admin_id'));
 
-    if (! $admin || $admin->otp_code != $request->otp || now()->greaterThan($admin->otp_expires_at)) {
+    if (! $admin || ! $admin->otp_code || (string) $admin->otp_code !== $request->otp || ! $admin->otp_expires_at || $admin->otp_expires_at->isPast()) {
         return back()->withErrors(['otp' => 'Invalid or expired code.']);
     }
 
@@ -87,5 +112,23 @@ public function verifyOtp(Request $request)
         return redirect()->route('admin.login');
     }
 
+    public function showChangePasswordForm()
+    {
+        return view('admin.change-password');
+    }
 
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $admin = Auth::guard('admin')->user();
+
+        $admin->password = Hash::make($request->password);
+        $admin->save();
+
+        return redirect()->route('admin.password.change')
+            ->with('success', 'Password changed successfully.');
+    }
 }

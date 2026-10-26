@@ -11,15 +11,17 @@ class OtpMail extends Mailable
     use Queueable, SerializesModels;
 
     public $otp;
+    public $mailSubject;
 
-    public function __construct($otp)
+    public function __construct($otp, $mailSubject = 'Your ChampionClub Admin Login Code')
     {
         $this->otp = $otp;
+        $this->mailSubject = $mailSubject;
     }
 
     public function build()
     {
-        return $this->subject('Your ChampionClub Admin Login Code')
+        return $this->subject($this->mailSubject)
                     ->view('emails.otp');
     }
 }

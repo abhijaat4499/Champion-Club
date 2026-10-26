@@ -1,125 +1,64 @@
 @extends('layouts.app')
 
-@section('title', 'Trainers — ChampionClub')
+@section('title', 'Our Coaches — Certified Personal Trainers | ChampionClub ' . config('gym.address.locality'))
+@section('description', 'Meet the ChampionClub coaching team in ' . config('gym.address.locality') . ' — strength, functional training and personal coaches. Book a personal training session.')
+@section('og_image', 'page-trainers')
 
 @section('content')
 
-<section class="page-intro">
-    <div class="container">
-        <h1>Coaches who've done the work</h1>
-        <p>Every coach at ChampionClub has competed, not just certified. Here's who you'll actually be training with.</p>
+<x-site.page-hero image="page-trainers" eyebrow="Coaches" title="Coaches who've done the work." crumb="Trainers">
+    Every coach at ChampionClub has competed, not just certified. Here's who you'll actually be training with.
+    <x-slot:actions>
+        <a href="{{ route('gym.contact', ['interest' => 'coaching']) }}" class="btn btn-gold">Book a session @icon('arrow', 'btn-arrow')</a>
+        <a href="{{ $gymContact->whatsappUrl('Hi, I want to book a personal training session') }}" target="_blank" rel="noopener" class="btn btn-ghost">@icon('whatsapp', '') WhatsApp us</a>
+    </x-slot:actions>
+</x-site.page-hero>
+
+<section class="bg-ink-950 pt-10 pb-14 lg:pt-12 lg:pb-16">
+    <div class="wrap">
+        @if($trainers->isEmpty())
+            <div class="mx-auto max-w-xl border border-white/10 bg-ink-900 p-10 text-center">
+                <span class="icon-tile">@icon('users', '')</span>
+                <h2 class="display-md mt-6 text-white">Trainers will be added soon.</h2>
+                <a href="{{ route('gym.contact', ['interest' => 'coaching']) }}" class="btn btn-gold mt-8">Ask about coaching</a>
+            </div>
+        @else
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                @foreach($trainers as $trainer)
+                    <div data-reveal style="--reveal-delay: {{ ($loop->index % 3) * 0.08 }}s">
+                        @include('partials.site.trainer-card', ['trainer' => $trainer, 'bioLimit' => 600])
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
 </section>
 
-<section class="trainers-detail">
-    <div class="container">
-
-        <div class="trainer-row">
-            <div class="trainer-visual">
-                <div class="trainer-badge-lg">AR</div>
-                <span class="trainer-exp">9 years coaching</span>
-            </div>
-            <div class="trainer-content">
-                <h2>Arjun Rathi</h2>
-                <p class="trainer-role">Strength & Powerlifting Coach</p>
-                <div class="trainer-tags">
-                    <span>Powerlifting</span>
-                    <span>Barbell Technique</span>
-                    <span>Strength Programming</span>
-                </div>
-                <p class="trainer-bio">Arjun spent six years competing in state-level powerlifting meets before moving into full-time coaching. He specializes in taking lifters from their very first squat to their first competition, with an obsessive focus on bar path and bracing before adding weight.</p>
-                <div class="trainer-achievement">
-                    <svg class="icon icon-small" viewBox="0 0 48 48"><circle cx="24" cy="20" r="10" fill="none"/><path d="M18 28 L12 42 L24 36 L36 42 L30 28" fill="none"/></svg>
-                    <span>Coached 30+ members to their first sanctioned powerlifting meet</span>
-                </div>
-                <blockquote class="trainer-quote">
-                    <p>"Strength is a skill before it's a number. Get the pattern right, and the weight takes care of itself."</p>
-                </blockquote>
-            </div>
+<section class="bg-bone-100 pt-12 pb-14 text-ink-950 lg:pt-14 lg:pb-16">
+    <div class="wrap">
+        <div class="max-w-2xl" data-reveal>
+            <p class="eyebrow !text-gold-700">Personal coaching</p>
+            <h2 class="display-lg mt-5">Programming built entirely around your goal.</h2>
         </div>
-
-        <div class="trainer-row reverse">
-            <div class="trainer-visual">
-                <div class="trainer-badge-lg">MC</div>
-                <span class="trainer-exp">7 years coaching</span>
-            </div>
-            <div class="trainer-content">
-                <h2>Meera Chandok</h2>
-                <p class="trainer-role">Boxing & Conditioning Coach</p>
-                <div class="trainer-tags">
-                    <span>Boxing Technique</span>
-                    <span>Fight Conditioning</span>
-                    <span>Pad Work</span>
-                </div>
-                <p class="trainer-bio">Meera represented her state at the national boxing championships before hanging up her competitive gloves. She now runs ChampionClub's boxing and combat fitness program, borrowing conditioning drills straight from fight camp for members who've never thrown a punch.</p>
-                <div class="trainer-achievement">
-                    <svg class="icon icon-small" viewBox="0 0 48 48"><circle cx="24" cy="20" r="10" fill="none"/><path d="M18 28 L12 42 L24 36 L36 42 L30 28" fill="none"/></svg>
-                    <span>Trained 5 members who went on to compete in amateur boxing bouts</span>
-                </div>
-                <blockquote class="trainer-quote">
-                    <p>"You don't need to want to fight. You just need to be willing to work like someone who does."</p>
-                </blockquote>
-            </div>
-        </div>
-
-        <div class="trainer-row">
-            <div class="trainer-visual">
-                <div class="trainer-badge-lg">VS</div>
-                <span class="trainer-exp">11 years coaching</span>
-            </div>
-            <div class="trainer-content">
-                <h2>Vikram Sethi</h2>
-                <p class="trainer-role">Functional Training & Rehab Coach</p>
-                <div class="trainer-tags">
-                    <span>Injury Rehab</span>
-                    <span>Mobility</span>
-                    <span>Return-to-Sport</span>
-                </div>
-                <p class="trainer-bio">Vikram's background is in sports rehabilitation, working with athletes recovering from ACL and shoulder injuries before they return to competition. At ChampionClub, he leads functional training sessions designed to build durable, pain-free movement for members of every age and ability.</p>
-                <div class="trainer-achievement">
-                    <svg class="icon icon-small" viewBox="0 0 48 48"><circle cx="24" cy="20" r="10" fill="none"/><path d="M18 28 L12 42 L24 36 L36 42 L30 28" fill="none"/></svg>
-                    <span>Certified CSCS with 11 years in strength and rehab coaching</span>
-                </div>
-                <blockquote class="trainer-quote">
-                    <p>"The best program is the one you can still do in ten years. We train for longevity, not just this Monday."</p>
-                </blockquote>
-            </div>
-        </div>
-
-        <div class="trainer-row reverse">
-            <div class="trainer-visual">
-                <div class="trainer-badge-lg">PN</div>
-                <span class="trainer-exp">6 years coaching</span>
-            </div>
-            <div class="trainer-content">
-                <h2>Priya Nair</h2>
-                <p class="trainer-role">Yoga, Recovery & Nutrition Coach</p>
-                <div class="trainer-tags">
-                    <span>Mobility & Recovery</span>
-                    <span>Breathwork</span>
-                    <span>Nutrition Coaching</span>
-                </div>
-                <p class="trainer-bio">Priya combines a 500-hour yoga teacher certification with a sports nutrition coaching background. She runs ChampionClub's recovery sessions and works one-on-one with Elite members to build nutrition plans that actually fit their schedule, not a generic template.</p>
-                <div class="trainer-achievement">
-                    <svg class="icon icon-small" viewBox="0 0 48 48"><circle cx="24" cy="20" r="10" fill="none"/><path d="M18 28 L12 42 L24 36 L36 42 L30 28" fill="none"/></svg>
-                    <span>Built ChampionClub's recovery and mobility curriculum from scratch</span>
-                </div>
-                <blockquote class="trainer-quote">
-                    <p>"Recovery isn't the day off. It's the part of training most people skip, then wonder why they're stuck."</p>
-                </blockquote>
-            </div>
-        </div>
-
+        <ol class="mt-14 grid gap-px overflow-hidden rounded-sm border border-ink-950/10 bg-ink-950/10 md:grid-cols-3">
+            @foreach([
+                ['icon' => 'clipboard', 'title' => 'Custom program design', 'text' => 'One-on-one programming built around your specific goal.'],
+                ['icon' => 'dumbbell', 'title' => 'Technique first', 'text' => 'Your coach corrects your form, not just your rep count.'],
+                ['icon' => 'calendar', 'title' => 'Weekly check-ins', 'text' => 'Regular check-ins to adjust the plan as you progress.'],
+            ] as $step)
+                <li class="bg-bone-50 p-8 lg:p-10" data-reveal style="--reveal-delay: {{ $loop->index * 0.08 }}s">
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex size-12 items-center justify-center rounded-md bg-ink-950 text-xl text-gold-400">@icon($step['icon'], '')</span>
+                        <span class="font-display text-5xl font-extrabold text-ink-950/10">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                    </div>
+                    <h3 class="mt-8 font-display text-[1.75rem] leading-tight">{{ $step['title'] }}</h3>
+                    <p class="mt-2 leading-relaxed text-ink-950/65">{{ $step['text'] }}</p>
+                </li>
+            @endforeach
+        </ol>
     </div>
 </section>
 
-<section class="final-cta">
-    <div class="container cta-inner">
-        <h2>Train with someone who's been there.</h2>
-        <p>Book a free trial and get matched with the coach who fits your goal.</p>
-        <a class="btn btn-primary" href="{{ route('gym.contact') }}">Book your free trial</a>
-        
-    </div>
-</section>
+@include('partials.site.cta-band', ['image' => 'gallery-7', 'title' => 'Train with someone who\'s been there.', 'text' => 'Book a free trial and get matched with the coach who fits your goal.'])
 
 @endsection

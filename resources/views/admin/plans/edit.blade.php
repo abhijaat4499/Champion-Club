@@ -1,13 +1,13 @@
-@extends('layouts.admin')
+@extends('layouts.admin-panel')
 
 @section('title', 'Edit Plan')
 
 @section('content')
 <div class="dashboard-wrap">
 
-    <header class="dashboard-header">
-        <h1>Edit Plan</h1>
-    </header>
+    <x-admin.page-header title="Edit Plan" icon="membership">
+        <a href="{{ route('admin.plans.index') }}" class="btn-logout">&larr; Back to plans</a>
+    </x-admin.page-header>
 
     <form method="POST" action="{{ route('admin.plans.update', $plan) }}" class="plan-form">
         @csrf
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-row">
-            <label for="features">Features (ek line mein ek feature)</label>
+            <label for="features">Features (one per line)</label>
             <textarea id="features" name="features" rows="5" required>{{ old('features', $plan->features) }}</textarea>
             @error('features') <div class="alert-error">{{ $message }}</div> @enderror
         </div>

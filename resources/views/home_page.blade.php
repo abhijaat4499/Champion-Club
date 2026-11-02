@@ -42,7 +42,7 @@
         <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between" data-reveal>
             <div>
                 <p class="eyebrow !text-gold-700">Take a look inside</p>
-                <h2 class="display-lg mt-5">Our gym</h2>
+                <h2 class="display-lg mt-5">Our Gym</h2>
             </div>
             <a href="{{ route('gym.gallery') }}" class="link-arrow !text-gold-700 max-sm:hidden">View full gallery @icon('arrow', '')</a>
         </div>
